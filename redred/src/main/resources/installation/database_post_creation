@@ -1,0 +1,58 @@
+ALTER TABLE `conquest`.`studies` 
+CHANGE COLUMN `id` `id` BIGINT(20) NOT NULL AUTO_INCREMENT ;
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `conquest`.`dicomseries_AFTER_INSERT` AFTER INSERT ON `dicomseries` FOR EACH ROW
+BEGIN
+	UPDATE studies SET company = new.Institutio,
+						series = (SELECT COUNT(*) FROM dicomseries WHERE StudyInsta = new.StudyInsta),
+                        images = (SELECT COUNT(*) FROM dicomseries ds, dicomimages di WHERE ds.StudyInsta = new.StudyInsta AND di.SeriesInst = ds.SeriesInst)
+			WHERE studyinsta = new.StudyInsta;
+END
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `conquest`.`dicomstudies_AFTER_INSERT` AFTER INSERT ON `dicomstudies` FOR EACH ROW
+BEGIN
+	DECLARE age VARCHAR(5);
+    DECLARE images INT;
+    DECLARE series INT;
+    
+    SET age = (SELECT CONCAT(TIMESTAMPDIFF(YEAR, STR_TO_DATE(new.PatientBir, '%Y%m%d') , CURDATE()),'Y'));
+    
+    SET series = (SELECT COUNT(*) FROM dicomseries WHERE StudyInsta = new.StudyInsta);
+    
+    SET images = (SELECT COUNT(*) FROM dicomseries ds, dicomimages di WHERE ds.StudyInsta = new.StudyInsta AND di.SeriesInst = ds.SeriesInst);
+    
+    INSERT INTO studies (age, 
+						birthdate,
+						genre,
+                        images,
+                        modality,
+                        series,
+                        submodality,
+                        studydate,
+                        patientname,
+                        studystatus,
+                        weight,
+                        studyinsta)
+		VALUES (age,
+				new.PatientBir,
+                new.PatientSex,
+                images,
+                new.StudyModal,
+                series,
+                new.StudyDescr,
+                new.StudyDate,
+                new.PatientNam,
+                'Pendiente',
+                new.PatientsWe,
+                new.StudyInsta);
+END
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `conquest`.`dicomimages_AFTER_INSERT` AFTER INSERT ON `dicomimages` FOR EACH ROW
+BEGIN
+	DECLARE studyid VARCHAR(64);
+    
+    SET studyid = (SELECT StudyInsta FROM dicomseries WHERE SeriesInst = NEW.SeriesInst);
+	
+    UPDATE studies SET images = (SELECT COUNT(*) FROM dicomseries ds, dicomimages di WHERE ds.StudyInsta = studyid AND di.SeriesInst = ds.SeriesInst)
+			WHERE studyinsta = studyid;
+END
