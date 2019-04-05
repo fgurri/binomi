@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+	<div class="container" id="page-wrapper">
+	<div th:insert="plantilla :: menu"></div>
+               <h1>Comparador de periodes</h1>
+               <div class="row">
+                <div class="col-lg-12">
+                	<div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>Comparativa de resposta en trucades a 6000 / Recepció</h3>
+                            </div>
+                        <div class="panel-body">
+                
+                        
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h4>Periode del [[${periode1_datainici}]] al [[${periode1_datafi}]]</h4>
+                                <p th:utext="${table_periode1}"></p>
+                            </div>
+                            <div class="col-lg-6">
+                                <h4>Periode del [[${periode2_datainici}]] al [[${periode2_datafi}]]</h4>
+                                <p th:utext="${table_periode2}"></p>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="panel-footer">
+                        <p>En la taula de l'esquerra obtenim les dades del primer periode en solitari. La comparativa es realitza en la taula de la dreta, on podem veure les dades del segón periode comparades amb el primer.</p>
+		                            <p>Els valors en parèntesi fan referència a les dades de la mateixa franja horaria del periode anterior. Per exemple:  23 (4) significa que en el periode 2 hem tingut 23 registres, 4 més que en el periode anterior.</p>
+		                            <p>En la columna de "% no ateses" un valor en verd és millora respecte al periode anterior. Un valor vermell indica empitjorament. Si per exemple trobem <font color='green'>37,6 % ( <i class='fa fa-arrow-up'></i>-9,11 %)</font> vol dir que hem millorat en un 9,11% el valor del periode anterior.</p>
+		                            <p>Els valors verds poden significar millora en l'atenció telefònica o una disminució del volum de trucades. S'han d'interpretar les columnes "Total" i "% no ateses" conjuntament.</p>
+                        </div>
+                    </div>
+                
+						<div class="row">
+                             <div class="panel panel-warning">
+		                        <div class="panel-heading">
+		                            Suggerències d'us
+		                        </div>
+		                        <div class="panel-body text-justify">
+		                            <p>Es recomana provar variacions en l'atenció telefònica que siguin sempre de un periode fixe (per exemple una setmana o un mes) i llençar la comparativa entre el nou periode i l'anterior.</p>
+		                            <p>En la opció de menú "Anàlisi de periode" podem obtenir informació del volum general en tots els departaments i de l'activitat de cada extensió telefònica.</p>
+		                            <p>És imprescindible tenir en compte esdeveniments importants que puguin alterar les dades, com per exemple: festius, canvis en la infrastructura (locució nova, telèfon espatallat, etc), torns amb menys personal per emergències, etc.</p>
+		                        </div>
+		                    </div>
+                        </div>
+                </div>
+            </div>
+	</div>
+	
+	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
+
+</body>
+</html>

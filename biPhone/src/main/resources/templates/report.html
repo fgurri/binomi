@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+	<div class="container" id="page-wrapper">
+		<div th:insert="plantilla :: menu"></div>
+		<h1>Anàlisi de periode del [[${periode_datainici}]] al [[${periode_datafi}]]</h1>
+		<div class="row">
+			<div class="col-lg-12">
+			
+				<div class="panel panel-primary">
+                        <div class="panel-heading">
+                        	<h3>Atenci&oacute; per grup de trucades</h3>
+                        </div>
+                        <div class="panel-body">
+                        	<p th:utext="${table_pergrup}"></p>
+                        </div>
+                        <div class="panel-footer">
+						<p class="small">Nota: fins el dia 3/4/2019 odontologia era la cua 7002. Es va canviar al grup 6002 per uniformitzar totes les opcions igual i perquè sent cua la centraleta les marcaba totes com no ateses.</p>
+                        </div>
+                    </div>
+			
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-10">
+				<div class="panel panel-primary">
+                        <div class="panel-heading">
+                        	<h3>Trucades per extensi&oacute;</h3>
+                        </div>
+                        <div class="panel-body">
+                        	<p th:utext="${table_perextensio}"></p>
+                        </div>
+                    </div>
+			</div>
+			<div class="col-lg-2">
+			<label class="label label-info">Total trucades</label>
+		      <div id="pie-chart" ></div>
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-primary">
+                        <div class="panel-heading">
+                        	<h3>Atenci&oacute; per franja horaria al grup de recepció (6000)</h3>
+                        </div>
+                        <div class="panel-body">
+                        	<p th:utext="${table_perfranjahoraria}"></p>
+                        </div>
+                    </div>				
+			</div>
+		</div>
+	</div>
+
+	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
+
+	<script th:inline="none">
+	    $(document).ready( function () {
+        	$('#dataTables-grup').DataTable({
+                order: [[ 0, "asc" ]]
+        	});
+            $('#dataTables-extensio').DataTable({
+                order: [[ 0, "asc" ]]
+        	});
+        } );
+    </script>
+    
+    <script type="text/javascript" th:inline="javascript">
+    var data_atesesperextensio = [[${data_atesesperextensio}]];
+    data_atesesperextensio = data_atesesperextensio.replace(/label/g, '"label"');
+    data_atesesperextensio = data_atesesperextensio.replace(/value/g, '"value"');
+    data_atesesperextensio = data_atesesperextensio.replace(/\'/g, '"');
+    console.log(data_atesesperextensio);
+    data_atesesperextensio = JSON.parse(data_atesesperextensio);
+    
+    	Morris.Donut({
+    	  element: 'pie-chart',
+    	  data: data_atesesperextensio
+    	});
+    </script>
+</body>
+</html>

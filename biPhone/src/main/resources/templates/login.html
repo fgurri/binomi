@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<div th:insert="plantilla :: headers"></div>
+</head>
+<body>
+<div class="container-fluid panel-login">
+	<div class="col-md-4">
+		<form method="POST" action="#" th:action="@{/login}">
+			<table class="table table-responsive">
+				<tr>
+					<td>Usuari</td>
+					<td><input type="text" id="username" name="username" /></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" id="password" name="password" /></td>
+				</tr>
+				<tr>
+					<td colspan="100%">
+						<button type="submit" title="Guardar">login</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+html {
+    height: 100%;
+}
+
+form {
+     display:inline;
+     margin:0px;
+     padding:0px;
+}
+
+body 
+	{
+		height: 100%; 
+	}
+
+.navbar-brand {
+  padding:0;
+}
+
+.menu-principal {
+	border-bottom: 1px solid;
+}
+
+.panel-login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: rgba(255,255,255,1);
+}
+
+#page-wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#area-chart,
+#line-chart,
+#bar-chart,
+#stacked,
+#pie-chart{
+  min-height: 250px;
+}

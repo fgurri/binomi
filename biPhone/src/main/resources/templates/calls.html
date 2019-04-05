@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+	<div class="container" id="page-wrapper">
+		<div th:insert="plantilla :: menu"></div>
+		<h1>Buscador de trucades</h1>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="row">
+					<form action="#" method="post" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-md-2 control-label">Origen</label>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-phone"></i></span><input name="origen"
+										id="origen" placeholder="Origen" class="form-control"
+										th:value="${origen}" type="text" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Destí</label>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-phone"></i></span><input name="desti"
+										id="desti" placeholder="Desti" class="form-control"
+										th:value="${desti}" type="text" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Data des de</label>
+							<div class="col-md-2 inputGroupContainer">
+								<div class="input-group">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-calendar"></i></span><input type="date"
+										name="periode_datainici" id="periode_datainici"
+										class="form-control" th:value="${periode_datainici}" readonly />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Data fins</label>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-calendar"></i></span><input type="date"
+										name="periode_datafi" id="periode_datafi" class="form-control"
+										th:value="${periode_datafi}" readonly />
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<p>Mostrant les primeres 100 trucades trobades de més recents a més antigues.</p>
+						<p th:utext="${table_trucades}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
+
+	<script th:inline="none">
+		$(document).ready(function() {
+			$('#dataTables-trucades').DataTable({
+				order : [ [ 0, "desc" ] ]
+			});
+		});
+	</script>
+</body>
+</html>

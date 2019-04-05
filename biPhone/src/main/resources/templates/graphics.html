@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+
+	<div class="container" id="page-wrapper">
+		<div th:insert="plantilla :: menu"></div>
+		<h1>Anàlisi de periode del [[${periode_datainici}]] al
+			[[${periode_datafi}]]</h1>
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3>Gràfica trucades rebudes vs ateses en valor absolut</h3>
+					</div>
+					<div class="panel-body">
+						<div class="col-lg-12 text-center">
+							<div id="line-chart"></div>
+						</div>
+
+					</div>
+					<div class="panel-footer">
+					<p>La linea negra indica el número de trucades rebudes al telefon d'atenció general del centre. La verda marca el nombre de trucades ateses. Quan més properes siguin les dues linees millor és la qualitat de l'atenció telefònica.</p>
+		                            <p>En la situació ideal les dues linees coincideixen. Quan no ho fan, s'han d'analitzar els següents indicadors
+		                            	<ul><li>Recordem que analitzem sempre la diferència entre les linees. Que la linea verda (ateses) baixi no té perquè ser dolent sempre i quan baixi en la mateixa pendent que la negra (rebudes).</li>
+			                            	<li>Quantitat total: 
+			                            		<ol>
+			                            			<li>Amb poc volum, un mal valor de la linea verda pot voler dir que cap de les persones que poden agafar trucades tenen l'habit de fer-ho o no són conscients de que si no l'atenen elles no ho farà ningú</li>
+			                            			<li>Amb molt volum, una mal valor de la linea verda pot voler dir saturació per pics puntuals</li>
+			                            		</ol>
+			                            	</li>
+			                            	<li>Canvis de pendent més pronunciats, ja que són el moment en que l'atenció comença a millorar/empitjorar i on s'hauria d'actuar. Recordem que una trucada no atesa sol generar repetició, per tant quan identifiquem que les gràfiques s'allunyen hauriem d'actuar sobretot en el moment en que la pendent és máxima.</li>
+			                            	<li>La linea verda (ateses) no acompanya la negre (rebudes): si la linea verda tendeix a anar recte i no acompanya les pujades o baixades de la negre això indica que falten recursos per atendre el volum de trucades entrants</li>
+											<li>La linea verda (ateses) acompanya la negre (rebudes) de forma constant: la diferència ens indica la mancança estructural d'atenció telefónica</li>
+										</ul>
+		                            </p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3>Gràfica diferència rebudes vs ateses en valor absolut</h3>
+					</div>
+					<div class="panel-body">
+						<div class="col-lg-12 text-center">
+							<div id="line-chart-dif"></div>
+						</div>
+
+					</div>
+					<div class="panel-footer">
+						<p>La linea vermella correspon a la diferència entre les trucades rebudes (linea negre de la gràfica anterior) i les ateses (linea verda de la gràfica anterior).</p>
+		                    <p>Aquesta gràfica ens permet veure de forma aïllada quin volum de trucades deixem d'atendre i com es distribueixen durant la jornada del centre.</p>
+		                    <p>Una franja recte indica déficit de recursos. El sistema d'atenció telefònica no s'adapta a la demanda de forma constant perquè està saturat o no optimitzat.</p>
+		                    <p>Una franja amb altibaixos molt variables indica algún problema concret que s'ha d'analitzar a fons. Alguns exemples podrien ser diferent personal a l'atenció telefònica o horari de treball de la persona de centraleta.</p>							
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<script type="text/javascript" th:inline="javascript">
+var data = [[${data}]];
+data = data.replace(/hour/g, '"hour"');
+data = data.replace(/a/g, '"a"');
+data = data.replace(/b/g, '"b"');
+data = data.replace(/\'/g, '"');
+console.log(data);
+data = JSON.parse(data);
+var config = {
+    data: data,
+    xkey: 'hour',
+    ykeys: ['a', 'b'],
+    labels: ['Rebudes', 'Ateses'],
+    fillOpacity: 0.6,
+    hideHover: 'auto',
+    behaveLikeLine: true,
+    parseTime: false,
+    resize: true,
+    pointFillColors:['#ffffff'],
+    pointStrokeColors: ['black'],
+    lineColors:['black','green']
+};
+config.element = 'line-chart';
+Morris.Line(config);
+
+
+var data_dif = [[${data_dif}]];
+data_dif = data_dif.replace(/hour/g, '"hour"');
+data_dif = data_dif.replace(/a/g, '"a"');
+data_dif = data_dif.replace(/\'/g, '"');
+console.log(data_dif);
+data_dif = JSON.parse(data_dif);
+var config_dif = {
+    data: data_dif,
+    xkey: 'hour',
+    ykeys: ['a'],
+    labels: ['Diferencia'],
+    fillOpacity: 0.6,
+    hideHover: 'auto',
+    behaveLikeLine: true,
+    parseTime: false,
+    resize: true,
+    pointFillColors:['#ffffff'],
+    pointStrokeColors: ['black'],
+    lineColors:['red']
+};
+config_dif.element = 'line-chart-dif';
+Morris.Line(config_dif);
+</script>
+</body>
+
+</html>

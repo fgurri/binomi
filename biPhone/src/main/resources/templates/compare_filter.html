@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+	<div class="container" id="page-wrapper">
+		<div th:insert="plantilla :: menu"></div>
+        <h1>Comparador de periodes</h1>
+        <p class="text-justify">Marqui les data inicial i final dels dos periodes que vol comparar. Pot introduir les dades una a o una o omplir els camps amb els accesos directes següents si coincideixen amb els periodes que vol comparar.</p>
+        <p><button onclick="javascript:ultimsDosMesos()">Últims dos mesos</button>
+        <button onclick="javascript:ultimesDuesSetmanes()">Últimes dues setmanes</button>
+		</p>
+		<div th:if="${message != null && message != ''}" th:text="${message}" class="alert alert-danger" role="alert"/>
+        <form th:action="@{/compare}" method="post" class="form-horizontal">
+        <div class="form-group">
+				<label class="col-md-2 control-label">Periode 1, data inici:</label>
+				<div class="col-md-2 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-calendar"></i></span><input type="date"
+							name="periode1_datainici" id="periode1_datainici"
+							class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Periode 1, data fi:</label>
+				<div class="col-md-2">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-calendar"></i></span><input type="date"
+							name="periode1_datafi" id="periode1_datafi" class="form-control" />
+					</div>
+				</div>
+			</div>
+        	<div class="form-group">
+				<label class="col-md-2 control-label">Periode 2, data inici:</label>
+				<div class="col-md-2 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-calendar"></i></span><input type="date"
+							name="periode2_datainici" id="periode2_datainici"
+							class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Periode 2, data fi:</label>
+				<div class="col-md-2">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-calendar"></i></span><input type="date"
+							name="periode2_datafi" id="periode2_datafi" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-md-1">
+					<input type=submit class="form-control" value="Buscar" />
+				</div>
+			</div>
+
+        </form>
+	</div>
+	
+	<script>
+		
+		function ultimsDosMesos () {
+			document.getElementById("periode1_datainici").value = "[[${twomonths_periode1_datainici}]]";
+			document.getElementById("periode1_datafi").value = "[[${twomonths_periode1_datafi}]]";
+			document.getElementById("periode2_datainici").value = "[[${twomonths_periode2_datainici}]]";
+			document.getElementById("periode2_datafi").value = "[[${twomonths_periode2_datafi}]]";
+		}
+		
+		function ultimesDuesSetmanes () {
+			document.getElementById("periode1_datainici").value = "[[${twoweeks_periode1_datainici}]]";
+			document.getElementById("periode1_datafi").value = "[[${twoweeks_periode1_datafi}]]";
+			document.getElementById("periode2_datainici").value = "[[${twoweeks_periode2_datainici}]]";
+			document.getElementById("periode2_datafi").value = "[[${twoweeks_periode2_datafi}]]";
+		}
+	</script>
+	
+	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
+</body>
+</html>

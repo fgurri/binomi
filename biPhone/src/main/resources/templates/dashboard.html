@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+	<div class="container" id="page-wrapper">
+	<div th:insert="plantilla :: menu"></div>
+               <h1>Panell diari</h1>
+               <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <i class="fa fa-phone fa-3x"></i>
+                                        <div class="big">Avui</div>
+                                    </div>
+                                    <div class="col-xs-10 text-right">
+                                        <p th:utext="${table_today}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <span class="pull-left">Resum trucades a dia d'avui</span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <i class="fa fa-phone fa-3x"></i>
+                                        <div class="big">fa 7 dies</div>
+                                    </div>
+                                    <div class="col-xs-10 text-right">
+										<p th:utext="${table_fa1setmana}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <span class="pull-left">Resum trucades de fa una setmana a aquesta hora</span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+                <div class="row">
+                <div class="col-lg-7">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <h3>Trucades no ateses al 6000/Recepció</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p th:utext="${table_noanswer}"></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-5">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <h3>Trucades ateses al 6000/Recepció</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p th:utext="${table_answered}"></p>
+                        </div>
+                        <div class="panel-footer">
+                            <p>Nota: El temps total d'atenció i la mitjana per trucada no són reals quan es mantenen trucades en espera. És a dir, si el 111 agafa 3 trucades a la vegada i manté 2 de elles en espera está triplicant el temps al telefon.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+                </div>
+            </div>
+	</div>
+	
+	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
+
+	<script th:inline="none">
+	    $(document).ready( function () {
+        	$('#dataTables-noanswer').DataTable({
+                order: [[ 3, "desc" ]]
+        	});
+            $('#dataTables-answered').DataTable({
+                order: [[ 1, "desc" ]]
+        	});
+        } );
+    </script>
+</body>
+</html>

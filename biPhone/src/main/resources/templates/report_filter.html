@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>	
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+	<div class="container" id="page-wrapper">
+		<div th:insert="plantilla :: menu"></div>
+        <h1>Anàlisi de periode</h1>
+        <p class="text-justify">Marqui les data inicial i final del periode que vol analitzar. Pot introduir les dades una a o una o omplir els camps amb els accesos directes següents.</p>
+        <p><button onclick="javascript:ultimMes()">Últim mes</button>
+        <button onclick="javascript:ultimaSetmana()">Última setmana</button>
+        <button onclick="javascript:ahir()">Ahir</button>
+        <button onclick="javascript:avui()">Avui</button>
+		</p>
+		<div th:if="${message != null && message != ''}" th:text="${message}" class="alert alert-danger" role="alert"/>
+		<form th:action="@{/report}" method="post" class="form-horizontal">
+        <div class="form-group">
+				<label class="col-md-2 control-label">Data inici:</label>
+				<div class="col-md-2 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-calendar"></i></span><input type="date"
+							name="periode_datainici" id="periode_datainici"
+							class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Data fi:</label>
+				<div class="col-md-2">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-calendar"></i></span><input type="date"
+							name="periode_datafi" id="periode_datafi" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-md-1">
+					<input type=submit class="form-control" value="Buscar" />
+				</div>
+			</div>
+			</form>
+	</div>
+	
+	<script>
+		
+		function ultimMes() {
+			document.getElementById("periode_datainici").value = "[[${lastmonth_periode_datainici}]]";
+			document.getElementById("periode_datafi").value = "[[${lastmonth_periode_datafi}]]";
+		}
+		
+		function ultimaSetmana() {
+			document.getElementById("periode_datainici").value = "[[${lastweek_periode_datainici}]]";
+			document.getElementById("periode_datafi").value = "[[${lastweek_periode_datafi}]]";
+		}
+		
+		function ahir() {
+			document.getElementById("periode_datainici").value = "[[${ahir}]]";
+			document.getElementById("periode_datafi").value = "[[${ahir}]]";
+		}
+		
+		function avui() {
+			document.getElementById("periode_datainici").value = "[[${avui}]]";
+			document.getElementById("periode_datafi").value = "[[${avui}]]";
+		}
+		
+	</script>
+	
+	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
+</body>
+</html>

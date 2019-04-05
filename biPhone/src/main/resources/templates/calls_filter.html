@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+	<div class="container" id="page-wrapper">
+		<div th:insert="plantilla :: menu"></div>
+		<h1>Buscador de trucades</h1>
+		<p class="text-justify">Pot buscar trucades realitzades des de alguna extensió (per
+			exemple posant 102 en el origen), realitzades a algún telefon en
+			concret introduint per exemple un número de mòvil en el camp destí i
+			també filtrar per les dates en les que es vulgui buscar. Es poden
+			omplir més de un camp a la vegada i buscar, per exemple, trucades
+			fetes al 937662030 en un dia concret. Mostra les primeres 100
+			trucades trobades ordenades de més recent a més antiga.</p>
+
+		<div th:if="${message != null && message != ''}" th:text="${message}" class="alert alert-danger" role="alert"/>
+		<form th:action="@{/calls}" method="post" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-md-2 control-label">Origen</label>
+				<div class="col-md-2">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-phone"></i></span><input name="origen"
+							id="origen" placeholder="Origen" class="form-control" value=""
+							type="text">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Destí</label>
+				<div class="col-md-2">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-phone"></i></span><input name="desti"
+							id="desti" placeholder="Desti" class="form-control" value=""
+							type="text">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Data des de</label>
+				<div class="col-md-2 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-calendar"></i></span><input type="date"
+							name="periode_datainici" id="periode_datainici"
+							class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Data fins</label>
+				<div class="col-md-2">
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-calendar"></i></span><input type="date"
+							name="periode_datafi" id="periode_datafi" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-md-1">
+					<input type=submit class="form-control" value="Buscar" />
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
+</head>
+<body>
+	<div class="container" id="page-wrapper">
+		<div th:insert="plantilla :: menu"></div>
+		<h1>Llegenda</h1>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="panel panel-primary">
+                        <div class="panel-heading">
+                        	<h3>Extensions</h3>
+                        </div>
+                        <div class="panel-body">
+                        	<p th:utext="${table_extensions}"></p>
+                        </div>
+                    </div>
+			</div>
+			<div class="col-lg-6">
+				<div class="panel panel-primary">
+                        <div class="panel-heading">
+                        	<h3>Grups i cues</h3>
+                        </div>
+                        <div class="panel-body">
+                        	<p th:utext="${table_grups}"></p>
+                        </div>
+                    </div>
+			</div>
+		</div>
+	</div>
+	
+	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
+
+	<script th:inline="none">
+	    $(document).ready( function () {
+        	$('#dataTables-grup').DataTable({
+                order: [[ 0, "asc" ]]
+        	});
+            $('#dataTables-extensio').DataTable({
+                order: [[ 0, "asc" ]]
+        	});
+        } );
+    </script>
+</body>
+</html>
