@@ -690,8 +690,9 @@ public class BIPhoneService {
 			table_trucades += "<th scope='col'>Dia i hora</th>";
 			table_trucades += "<th scope='col'>Origen</th>";
 			table_trucades += "<th scope='col'>Desti</th>";
-			table_trucades += "<th scope='col'>Durada</th>";
 			table_trucades += "<th scope='col'>Estado</th>";
+			table_trucades += "<th scope='col'>Canal</th>";
+			table_trucades += "<th scope='col'>Durada</th>";
 			table_trucades += "</tr>";
 			table_trucades += "</thead>";
 			table_trucades += "<tbody>";
@@ -699,7 +700,7 @@ public class BIPhoneService {
 	        try {
 	        	Connection conn = Utils.createAsteriskConnection();
 	            Statement stmt = conn.createStatement();
-	            String sql = "select calldate, src, dst, duration, disposition " + 
+	            String sql = "select calldate, src, dst, duration, disposition, dstchannel  " + 
 	            		"from asteriskcdrdb.cdr where ";
 	            boolean useAND = false;
 	            if (origen.compareTo("") != 0) {
@@ -736,6 +737,7 @@ public class BIPhoneService {
 	            	String diaHora = rs.getString("calldate");
 	                String src = rs.getString("src");
 	                String dst = rs.getString("dst");
+	                String channel = rs.getString("dstchannel");
 	                int duration = rs.getInt("duration");
 	                String estado = rs.getString("disposition");
 	                
@@ -743,8 +745,9 @@ public class BIPhoneService {
 	                table_trucades += "<td>" + diaHora + "</td>";
 	                table_trucades += "<td>" + src + "</td>";
 	                table_trucades += "<td>" + dst + "</td>";
-	                table_trucades += "<td>" + duration + "</td>";
 	                table_trucades += "<td>" + estado + "</td>";
+	                table_trucades += "<td>" + channel + "</td>";
+	                table_trucades += "<td>" + Utils.parseSecondsToReport(duration) + "</td>";
 	                table_trucades += "</tr>";
 	            }
 	            table_trucades += "</tbody></table>";

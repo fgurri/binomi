@@ -71,4 +71,20 @@ public class Utils {
 	h= h / 60;
         return (String.format("%02d", h)+":"+String.format("%02d", m)+":"+String.format("%02d", s));
     }
+    
+    /*
+     * Receives a date in format YYYY-MM-DD and returns DD/MM/YYYY
+     */
+    public static String invertStringDate (String date) {
+        
+    	if (date.compareTo("") == 0) 
+    		return "";
+    	
+        String splittedDate[] = date.split("-"); 
+        String year = splittedDate[0];
+        String month = splittedDate[1];
+        String day = splittedDate[2];
+        
+        return day + "/" + month + "/" + year;
+    }
 }

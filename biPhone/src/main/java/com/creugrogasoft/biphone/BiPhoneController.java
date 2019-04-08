@@ -173,8 +173,8 @@ public class BiPhoneController {
 				periode_datafi.compareTo("") != 0 ) {
 			String rawdata = BIPhoneService.getDadesGraphics(periode_datainici, periode_datafi);
 			
-			model.addAttribute("periode_datainici", periode_datainici);
-			model.addAttribute("periode_datafi", periode_datafi);
+			model.addAttribute("periode_datainici", Utils.invertStringDate(periode_datainici));
+			model.addAttribute("periode_datafi", Utils.invertStringDate(periode_datafi));
 			
 			String data = rawdata.split("&&")[0];
 			String data_dif = rawdata.split("&&")[1];
@@ -209,10 +209,10 @@ public class BiPhoneController {
 			String table_periode1 = tables.split("&&")[0];
 			String table_periode2 = tables.split("&&")[1];
 			
-			model.addAttribute("periode1_datainici", periode1_datainici);
-			model.addAttribute("periode1_datafi", periode1_datafi);
-			model.addAttribute("periode2_datainici", periode2_datainici);
-			model.addAttribute("periode2_datafi", periode2_datafi);
+			model.addAttribute("periode1_datainici", Utils.invertStringDate(periode1_datainici));
+			model.addAttribute("periode1_datafi", Utils.invertStringDate(periode1_datafi));
+			model.addAttribute("periode2_datainici", Utils.invertStringDate(periode2_datainici));
+			model.addAttribute("periode2_datafi", Utils.invertStringDate(periode2_datafi));
 			
 			model.addAttribute("table_periode1", table_periode1);
 			model.addAttribute("table_periode2", table_periode2);
@@ -355,7 +355,7 @@ public class BiPhoneController {
 			
 			model.addAttribute("table_trucades", table_trucades);
 		} else {
-			model.addAttribute("message", "Ha de omplir almenys un camp");
+			model.addAttribute("message", "Ha d'omplir mínim un camp");
 			return "calls_filter";
 		}
 		
@@ -363,7 +363,7 @@ public class BiPhoneController {
 	}
 	
 	@RequestMapping("/report")
-    public String compare(ModelMap model, 
+    public String report(ModelMap model, 
     		@RequestParam (value = "periode_datainici", required = false, defaultValue = "") String periode_datainici,
     		@RequestParam (value = "periode_datafi", required = false, defaultValue = "") String periode_datafi) {
 		
@@ -377,8 +377,8 @@ public class BiPhoneController {
 			String table_perfranjahoraria = BIPhoneService.getPeriode(periode_datainici, periode_datafi);
 			String data_atesesperextensio = BIPhoneService.getDadesGraphicsReport(periode_datainici, periode_datafi);
 			
-			model.addAttribute("periode_datainici", periode_datainici);
-			model.addAttribute("periode_datafi", periode_datafi);
+			model.addAttribute("periode_datainici", Utils.invertStringDate(periode_datainici));
+			model.addAttribute("periode_datafi", Utils.invertStringDate(periode_datafi));
 			model.addAttribute("data_atesesperextensio", data_atesesperextensio);
 			
 			model.addAttribute("table_pergrup", table_pergrup);

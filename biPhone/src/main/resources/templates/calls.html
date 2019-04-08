@@ -65,8 +65,27 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<p>Mostrant les primeres 100 trucades trobades de més recents a més antigues.</p>
-						<p th:utext="${table_trucades}"></p>
+					
+						<div class="panel panel-primary">
+	                        <div class="panel-heading">
+	                            <h4>Llista de trucades trobades</h4>
+	                            </div>
+	                        <div class="panel-body">
+	                        	<p th:utext="${table_trucades}"></p>
+	                        </div>
+	                        <div class="panel-footer">
+	                        	<p>Es mostren les primeres 100 trucades trobades de més recents a més antigues.</p>
+	                        	<p>La columna "Canal" és un camp calculat internament per la centraleta que ens indica:
+	                        		<ol>
+	                        			<li>Per les trucades rebudes, quina extensió ha atés aquella trucada. Si ens trobem per exemple amb que el canal és "SIP/101-0004969d" vol dir que l'ha atès l'extensió 101.</li>
+	                        			<li>Per les trucades realitzades, per quin operador ha sortit</li>
+	                        			<li>S'ha detectat que en ocasions el camp ve buit sense que en coneguem la causa</li>
+	                        		</ol>
+	                        	</p>
+	                        	<p>El valor *8 vol dir que s'ha capturat la trucada</p>
+	                        	<p>Quan ens trobem amb destí "s" vol dir que la persona ha penjat durant la locució o falca</p>
+	                        </div>
+	                    </div>
 					</div>
 				</div>
 			</div>
