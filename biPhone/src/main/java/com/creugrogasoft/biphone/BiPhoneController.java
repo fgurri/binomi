@@ -10,12 +10,15 @@ import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.naming.*;
 import javax.naming.directory.*;
 import javax.naming.ldap.LdapContext;
+import javax.servlet.http.HttpSession;
 
 import java.util.Hashtable;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
@@ -24,6 +27,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import binomi.windows.*;
 
@@ -33,18 +39,48 @@ import com.creugrogasoft.biphone.utils.*;
 @Scope("request")
 public class BiPhoneController {
 	
-	@Autowired
-	private User user;
+	@Resource(name = "userInfoBean")
+	private UserInfo userInfo;
 	
 	@Autowired
 	private Environment  env;
 	
 
-	@RequestMapping("/")
-    public String index() throws NamingException {
+	@RequestMapping("/login")
+    public String login(ModelMap model, @RequestParam (value = "username", required = true) String username,
+    		@RequestParam (value = "password", required = true) String password) throws NamingException {
 		
-		if (!user.isLogged())
+		try{
+			LdapContext ctx = ActiveDirectory.getConnection(username, password);
+			User user = ActiveDirectory.getUser(username, ctx);
+		    ctx.close();
+		    userInfo.setName(user.getUserPrincipal());
+		    userInfo.setFullName(user.getCommonName());
+		    // user logged ok, check if app is userRestricted
+		    	if (env.getProperty("usersAllowed").contains(user.getUserPrincipal())) {
+		    		userInfo.setLogged(true);
+		    	} else {
+		    		model.addAttribute("message", "Login correcte però no té permisos per accedir a l'aplicació");
+		    		return "login";
+		    	}
+		    return "redirect:/";
+		}
+		catch(Exception e) {
+		    //Failed to authenticate user!
+			userInfo.setLogged(false);
+			model.addAttribute("message", "Login incorrecte. Recordi que és el mateix usuari i contrasenya amb el que ha accedit a l'ordinador.");
+		}
+		
+		return "login";
+	}
+	
+	@RequestMapping("/")
+    public String index(ModelMap model) throws NamingException {
+		
+		if (!userInfo.isLogged())
 			return "login";
+		
+		model.addAttribute("fullName", userInfo.getFullName());
 		
 		return "home";
     }
@@ -52,43 +88,21 @@ public class BiPhoneController {
 	@RequestMapping("/llegenda")
     public String llegenda(ModelMap model) {
 		
+		if (!userInfo.isLogged())
+			return "login";
+		
 		model.addAttribute("table_grups", BIPhoneService.getLlegendaGrups());
 		model.addAttribute("table_extensions", BIPhoneService.getLlegendaExtensions());
 		
 		return "llegenda";
     }
 	
-	@RequestMapping("/login")
-    public String login(@RequestParam (value = "username", required = true) String username,
-    		@RequestParam (value = "password", required = true) String password) throws NamingException {
-		
-		try{
-			LdapContext ctx = ActiveDirectory.getConnection(username, password);
-			user = ActiveDirectory.getUser(username, ctx);
-		    ctx.close();
-		    System.out.println ("Username " + user.getUserPrincipal() + " logged!");
-		    System.out.println ("Groups:" + user.getMemberOf());
-		    // user logged ok, check if app is userRestricted
-		    if (env.getProperty("userRestricted").compareTo("1") == 0) {
-		    	if (env.getProperty("usersAllowed").contains(user.getUserPrincipal())) {
-		    		System.out.println("User allowed!");
-		    	} else {
-		    		user = null;
-		    		System.out.println(":( User NOT allowed! Get out madafaka!!");
-		    	}
-		    }
-		    return "home";
-		}
-		catch(Exception e) {
-		    //Failed to authenticate user!
-		    user = null;
-		}
-		
-		return "login";
-	}
 	
 	@RequestMapping("/dashboard")
     public String dashboard(ModelMap model) {
+		
+		if (!userInfo.isLogged())
+			return "login";
 		
 		model.addAttribute("table_today", BIPhoneService.getAvui());
 		model.addAttribute("table_fa1setmana", BIPhoneService.getFa1Setmana());
@@ -101,6 +115,9 @@ public class BiPhoneController {
 	
 	@RequestMapping("/graphics_filter")
     public String graphics_filter(ModelMap model) {
+		
+		if (!userInfo.isLogged())
+			return "login";
 
 		/*
 		 * Last month
@@ -149,6 +166,9 @@ public class BiPhoneController {
     		@RequestParam (value = "periode_datainici", required = false, defaultValue = "") String periode_datainici,
     		@RequestParam (value = "periode_datafi", required = false, defaultValue = "") String periode_datafi) {
 		
+		if (!userInfo.isLogged())
+			return "login";
+		
 		if (	periode_datainici.compareTo("") != 0 &&
 				periode_datafi.compareTo("") != 0 ) {
 			String rawdata = BIPhoneService.getDadesGraphics(periode_datainici, periode_datafi);
@@ -176,6 +196,9 @@ public class BiPhoneController {
     		@RequestParam (value = "periode1_datafi", required = false, defaultValue = "") String periode1_datafi,
     		@RequestParam (value = "periode2_datainici", required = false, defaultValue = "") String periode2_datainici,
     		@RequestParam (value = "periode2_datafi", required = false, defaultValue = "") String periode2_datafi) {
+		
+		if (!userInfo.isLogged())
+			return "login";
 
 		if (	periode1_datainici.compareTo("") != 0 &&
 				periode1_datafi.compareTo("") != 0 &&
@@ -203,6 +226,9 @@ public class BiPhoneController {
 	
 	@RequestMapping("/compare_filter")
     public String compare_filter(ModelMap model) {
+		
+		if (!userInfo.isLogged())
+			return "login";
 		
 		/*
 		 * Last 2 months
@@ -251,6 +277,9 @@ public class BiPhoneController {
 	
 	@RequestMapping("/report_filter")
     public String report_filter(ModelMap model) {
+		
+		if (!userInfo.isLogged())
+			return "login";
 
 		/*
 		 * Last month
@@ -297,6 +326,9 @@ public class BiPhoneController {
 	@RequestMapping("/calls_filter") 	
     public String calls_filter(ModelMap model) {
 		
+		if (!userInfo.isLogged())
+			return "login";
+		
 		return "calls_filter";
 	}
 	
@@ -306,6 +338,9 @@ public class BiPhoneController {
     		@RequestParam (value = "desti", required = false, defaultValue = "") String desti,
     		@RequestParam (value = "periode_datainici", required = false, defaultValue = "") String periode_datainici,
     		@RequestParam (value = "periode_datafi", required = false, defaultValue = "") String periode_datafi) {
+		
+		if (!userInfo.isLogged())
+			return "login";
 
 		if (	origen.compareTo("") != 0
 				|| desti.compareTo("") != 0
@@ -331,6 +366,9 @@ public class BiPhoneController {
     public String compare(ModelMap model, 
     		@RequestParam (value = "periode_datainici", required = false, defaultValue = "") String periode_datainici,
     		@RequestParam (value = "periode_datafi", required = false, defaultValue = "") String periode_datafi) {
+		
+		if (!userInfo.isLogged())
+			return "login";
 
 		if (	periode_datainici.compareTo("") != 0 &&
 				periode_datafi.compareTo("") != 0 ) {

@@ -13,6 +13,13 @@ body
 		height: 100%; 
 	}
 
+.body-background {
+	background-image: url("../img/call-center-4-50.png");
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .navbar-brand {
   padding:0;
 }
@@ -21,8 +28,17 @@ body
 	border-bottom: 1px solid;
 }
 
+.footer {
+	border-top: 0.5px solid;
+}
+
+.highlight {
+    background-color: lightyellow !important;
+}
+
 .panel-login {
     position: absolute;
+    width: 350px;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
@@ -32,6 +48,10 @@ body
 #page-wrapper {
     width: 100%;
     margin: 0 auto;
+}
+
+#menu {
+	font-size: 17px;
 }
 
 #area-chart,

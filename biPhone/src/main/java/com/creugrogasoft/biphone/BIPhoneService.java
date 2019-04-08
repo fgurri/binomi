@@ -487,7 +487,7 @@ public class BIPhoneService {
 	                    percent_no_answer = 100f*((1f*no_ateses) / (1f*total));
 	                }
 	                String fpercent_no_answer = String.format("%.3g%n", percent_no_answer);
-	                table_periode1 += "<tr>";
+	                table_periode1 += "<tr class='"+rs.getString("hora")+"h'>";
 	                table_periode1 += "<td>" + rs.getString("hora")+ "h</td>";
 	                table_periode1 += "<td>" + ateses + "</td>";
 	                table_periode1 += "<td>" + no_ateses + "</td>";
@@ -516,6 +516,7 @@ public class BIPhoneService {
 	                int ateses = rs.getInt("ateses");
 	                int no_ateses = total - ateses;
 	                float percent_no_answer = 0;
+	                float percent = 0;
 
 	                if (total > 0) {
 	                    percent_no_answer = 100f*((1f*no_ateses) / (1f*total));
@@ -526,14 +527,23 @@ public class BIPhoneService {
 	                    fontcomparativa  = "red";
 	                    icon = "fa-arrow-down";
 	                }
+	                
+	                if (total > 0) {
+	                    percent = 100f*((1f*fila_periode_anterior.getTotal()) / (1f*total));
+	                }
+	                String totalicon = "fa-arrow-down";
+	                if (fila_periode_anterior.getTotal() < total) {
+	                	totalicon = "fa-arrow-up";
+	                }
 
 
 	                String fpercent_no_answer = String.format("%.3g%n", percent_no_answer);
-	                table_periode2 += "<tr>";
+	                table_periode2 += "<tr class='"+rs.getString("hora")+"h'>";
 	                table_periode2 += "<td>" + rs.getString("hora")+ "h</td>";
 	                table_periode2 += "<td>" + ateses + " ("+(ateses - fila_periode_anterior.getAteses())+")</td>";
 	                table_periode2 += "<td>" + no_ateses + " ("+(no_ateses - fila_periode_anterior.getNoAteses()) +")</td>";
-	                table_periode2 += "<td>" + total + " ("+(total - fila_periode_anterior.getTotal())+")</td>";
+	                String totalsdif = String.format("%.3g%n", 1f*(100-percent));
+	                table_periode2 += "<td>" + total + " ("+(total - fila_periode_anterior.getTotal())+"&nbsp;<strong><i class='fa "+totalicon+"'></i>"+totalsdif+"%</strong>)</td>";
 	                String sdif = String.format("%.3g%n", percent_no_answer-fila_periode_anterior.getPercentatgeNoAteses());
 	                table_periode2 += "<td><font color='"+fontcomparativa+"'>" + fpercent_no_answer + " % ( <i class='fa "+icon+"'></i>"+sdif+"%</font>)</td>";
 	                table_periode2 += "</tr>";

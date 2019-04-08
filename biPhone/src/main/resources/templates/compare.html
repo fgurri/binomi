@@ -12,7 +12,7 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3>Comparativa de resposta en trucades a 6000 / Recepció</h3>
+                            <h4>Comparativa de resposta en trucades a 6000 / Recepció</h4>
                             </div>
                         <div class="panel-body">
                 
@@ -50,9 +50,33 @@
                         </div>
                 </div>
             </div>
+            <div th:insert="plantilla :: footer"></div>
 	</div>
 	
 	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
 
+	<script language="javascript">
+		$(document).ready(function() {
+		    $("tbody tr").each(function(k, v){
+		        var self = this;
+		        (function(){ 
+		            $(self).hover(
+		                function() {
+		                	var selfclass = $(self).attr('class');
+		                	$('.'+selfclass).each(function() {
+		                		$(this).addClass("highlight");
+		                	});
+		                }, function() {
+		                	$(self).removeClass("highlight");
+		                	var selfclass = $(self).attr('class');
+		                	$('.'+selfclass).each(function() {
+		                		$(this).removeClass("highlight");
+		                	});
+		                }
+		            );
+		        })(k); // pass index so function above remembers it
+		    });
+		});
+	</script>
 </body>
 </html>

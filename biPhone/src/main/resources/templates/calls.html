@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row">
-					<form action="#" method="post" class="form-horizontal">
+					<form th:action="@{/calls}" method="post" class="form-horizontal">
 						<div class="form-group">
 							<label class="col-md-2 control-label">Origen</label>
 							<div class="col-md-2">
@@ -19,7 +19,7 @@
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-phone"></i></span><input name="origen"
 										id="origen" placeholder="Origen" class="form-control"
-										th:value="${origen}" type="text" readonly>
+										th:value="${origen}" type="text">
 								</div>
 							</div>
 						</div>
@@ -30,7 +30,7 @@
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-phone"></i></span><input name="desti"
 										id="desti" placeholder="Desti" class="form-control"
-										th:value="${desti}" type="text" readonly>
+										th:value="${desti}" type="text">
 								</div>
 							</div>
 						</div>
@@ -41,7 +41,7 @@
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-calendar"></i></span><input type="date"
 										name="periode_datainici" id="periode_datainici"
-										class="form-control" th:value="${periode_datainici}" readonly />
+										class="form-control" th:value="${periode_datainici}"/>
 								</div>
 							</div>
 						</div>
@@ -52,8 +52,13 @@
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-calendar"></i></span><input type="date"
 										name="periode_datafi" id="periode_datafi" class="form-control"
-										th:value="${periode_datafi}" readonly />
+										th:value="${periode_datafi}" />
 								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-md-1">
+								<input type=submit class="form-control" value="Buscar" />
 							</div>
 						</div>
 					</form>
@@ -66,6 +71,7 @@
 				</div>
 			</div>
 		</div>
+		<div th:insert="plantilla :: footer"></div>
 	</div>
 
 	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->

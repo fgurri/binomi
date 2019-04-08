@@ -3,11 +3,24 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<div th:insert="plantilla :: headers"></div>
 </head>
-<body>
-<div class="container-fluid panel-login">
+<body class="body-background">
+<div class="container panel-login">
 	<div class="col-md-4">
 		<form method="POST" action="#" th:action="@{/login}">
 			<table class="table table-responsive">
+				<tr>
+					<td colspan="100%" class="text-center"><img th:src="@{/img/logoCreuGroga.jpg}"/></td>
+				</tr>
+				<tr>
+					<td colspan="100%">Introdueixi usuari i contrasenya del domini (és el mateix amb el que ha accedit a l'ordinador)</td>
+				</tr>
+				<div th:if="${message != null && message != ''}">
+					<tr>
+						<td colspan="100%">
+						<p class="alert alert-danger" role="alert" th:text="${message}" ></p>
+						</td>
+					</tr>
+				</div>
 				<tr>
 					<td>Usuari</td>
 					<td><input type="text" id="username" name="username" /></td>
@@ -17,7 +30,7 @@
 					<td><input type="password" id="password" name="password" /></td>
 				</tr>
 				<tr>
-					<td colspan="100%">
+					<td colspan="100%" class="text-center">
 						<button type="submit" title="Guardar">login</button>
 					</td>
 				</tr>

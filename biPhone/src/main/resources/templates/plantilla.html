@@ -6,11 +6,11 @@
 	<link th:href="@{/webjars/font-awesome/4.2.0/css/font-awesome.min.css}" rel="stylesheet">
 	<!-- Custom CSS -->
     <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
-  <link th:href="@{/css/biphone.css}" rel="stylesheet">
     <!-- dataTables css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-    
      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+	<link th:href="@{/css/biphone.css}" rel="stylesheet">
+     
      
      		<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
@@ -35,18 +35,22 @@
 		    </div>
 		
 		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		    <div class="collapse navbar-collapse" id="menu">
 		      <ul class="nav navbar-nav">
-		        <li><a th:href="@{/dashboard}">Panell diari</a></li>
-		        <li><a th:href="@{/report_filter}">Anàlisi de periode</a></li>		        
-		        <li><a th:href="@{/compare_filter}">Comparador de periodes</a></li>
-		        <li><a th:href="@{/calls_filter}">Buscador de Trucades</a></li>
-		        <li><a th:href="@{/graphics_filter}">Gràfiques</a></li>
-		        <li><a th:href="@{/llegenda}">Llegenda</a></li>
+		      	<li><a th:href="@{/}"><span class="fa fa-home">&nbsp;Inici</span></a></li>
+		        <li><a th:href="@{/dashboard}"><span class="fa fa-dashboard">&nbsp;Panell diari</span></a></li>
+		        <li><a th:href="@{/report_filter}"><span class="fa fa-calendar">&nbsp;Anàlisi de periode</span></a></li>		        
+		        <li><a th:href="@{/compare_filter}"><span class="fa fa-tasks">&nbsp;Comparador de periodes</span></a></li> 
+		        <li><a th:href="@{/calls_filter}"><span class="fa fa-phone">&nbsp;Buscador de Trucades</span></a></li>
+		        <li><a th:href="@{/graphics_filter}"><span class="fa fa-bar-chart-o">&nbsp;Gràfiques</span></a></li>
+		        <li><a th:href="@{/llegenda}"><span class="fa fa-book">&nbsp;Llegenda</span></a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
+  	</div>
+  	
+  	<div th:fragment="footer">
   	</div>
   	
   	<div th:fragment="includes">

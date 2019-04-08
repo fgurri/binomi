@@ -12,7 +12,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-primary">
                         <div class="panel-heading">
-                        	<h3>Extensions</h3>
+                        	<h4>Extensions</h4>
                         </div>
                         <div class="panel-body">
                         	<p th:utext="${table_extensions}"></p>
@@ -22,7 +22,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-primary">
                         <div class="panel-heading">
-                        	<h3>Grups i cues</h3>
+                        	<h4>Grups i cues</h4>
                         </div>
                         <div class="panel-body">
                         	<p th:utext="${table_grups}"></p>
@@ -30,6 +30,7 @@
                     </div>
 			</div>
 		</div>
+		<div th:insert="plantilla :: footer"></div>
 	</div>
 	
 	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->

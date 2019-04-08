@@ -23,8 +23,6 @@ import org.springframework.stereotype.Component;
 //*************************************************************************/
 /** Used to represent a User in Active Directory
  */
-@Component
-@Scope("session")
 public class User {
       private String distinguishedName;
       private String userPrincipal;
@@ -33,8 +31,7 @@ public class User {
       private boolean islogged = false;
       
       public User(Attributes attr) throws javax.naming.NamingException {
-    	  System.out.println("Creating new filled user instance");
-          userPrincipal = (String) attr.get("userPrincipalName").get();
+    	  userPrincipal = (String) attr.get("userPrincipalName").get();
           distinguishedName = (String) attr.get("distinguishedName").get();
           commonName = (String) attr.get("cn").get();
           if (attr.get("memberOf") != null) {

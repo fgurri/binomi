@@ -52,7 +52,7 @@
                 <div class="col-lg-7">
                     <div class="panel panel-red">
                         <div class="panel-heading">
-                            <h3>Trucades no ateses al 6000/Recepció</h3>
+                            <h4>Trucades no ateses al 6000/Recepció</h4>
                         </div>
                         <div class="panel-body">
                             <p th:utext="${table_noanswer}"></p>
@@ -63,7 +63,7 @@
                 <div class="col-lg-5">
                     <div class="panel panel-green">
                         <div class="panel-heading">
-                            <h3>Trucades ateses al 6000/Recepció</h3>
+                            <h4>Trucades ateses al 6000/Recepció</h4>
                         </div>
                         <div class="panel-body">
                             <p th:utext="${table_answered}"></p>
@@ -76,6 +76,7 @@
                 <!-- /.col-lg-4 -->
                 </div>
             </div>
+            <div th:insert="plantilla :: footer"></div>
 	</div>
 	
 	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->

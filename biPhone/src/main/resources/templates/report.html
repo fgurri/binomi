@@ -13,7 +13,7 @@
 			
 				<div class="panel panel-primary">
                         <div class="panel-heading">
-                        	<h3>Atenci&oacute; per grup de trucades</h3>
+                        	<h4>Atenci&oacute; per grup de trucades</h4>
                         </div>
                         <div class="panel-body">
                         	<p th:utext="${table_pergrup}"></p>
@@ -29,7 +29,7 @@
 			<div class="col-lg-10">
 				<div class="panel panel-primary">
                         <div class="panel-heading">
-                        	<h3>Trucades per extensi&oacute;</h3>
+                        	<h4>Trucades per extensi&oacute;</h4>
                         </div>
                         <div class="panel-body">
                         	<p th:utext="${table_perextensio}"></p>
@@ -45,7 +45,7 @@
 			<div class="col-lg-12">
 				<div class="panel panel-primary">
                         <div class="panel-heading">
-                        	<h3>Atenci&oacute; per franja horaria al grup de recepció (6000)</h3>
+                        	<h4>Atenci&oacute; per franja horaria al grup de recepció (6000)</h4>
                         </div>
                         <div class="panel-body">
                         	<p th:utext="${table_perfranjahoraria}"></p>
@@ -53,6 +53,7 @@
                     </div>				
 			</div>
 		</div>
+		<div th:insert="plantilla :: footer"></div>
 	</div>
 
 	<!--/*/ <th:block th:include="plantilla :: includes"> </th:block> /*/-->
