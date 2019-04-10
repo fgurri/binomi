@@ -13,6 +13,18 @@ body
 		height: 100%; 
 	}
 
+.indent-small {
+	margin-left: 20px;	
+}
+
+.indent-medium {
+	margin-left: 40px;	
+}
+
+.indent-big {
+	margin-left: 60px;	
+}
+
 .body-background {
 	background-image: url("../img/call-center-4-50.png");
 	background-position: center;

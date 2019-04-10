@@ -9,57 +9,146 @@
 		<div th:insert="plantilla :: menu"></div>
 		<h1>Inici</h1>
 		<div class="row">
-                <div class="col-lg-12">
-                	<p>
-                		Benvingut/da [[${fullName}]] a la App d'analisi de trucades.
-                	</p>
-                	<p>	
-                		<strong>¿Què pot fer amb aquesta aplicació?</strong> En el menú superior trobarà les següents opcions:
-                	</p>
-                	<p>
-                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/} + '\''"><span class="fa fa-home">&nbsp;Inici</span></button> Pantalla de benvinguda
-                	</p>
-                	<p>
-                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/dashboard} + '\''"><span class="fa fa-dashboard">&nbsp;Panell diari</span></button> visió de com està anant l'atenció al telefon avui. Aquesta pantalla inclou
-                			<ol>
-                				<li>panell de trucades rebudes i ateses per departament</li>
-                				<li>mateix panell però amb dades de fa 7 dies per tenir una comparativa de si estem millorant o empitjorant</li>
-                				<li>registre de telefons que han trucat a consultes generals i no els hem atès</li>
-                				<li>quantes trucades ha atès cada extensió del grup de atenció telefònica</li>
-                			</ol>
-                	</p>
-                	<p>
-                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/report_filter} + '\''"><span class="fa fa-calendar">&nbsp;Anàlisi de periode</span></button> eina per analitzar l'atenció telefònica en un periode concret. Permet:
-                			<ol>
-                				<li>veure les trucades a cada departament</li>
-                				<li>veure les trucades ateses i realitzades de cada extensió del grup d'atenció telefònica</li>
-                				<li>veure gràficament la distribució de càrrega de trucades per extensió</li>
-                				<li>valorar la qualitat d'atenció per franja horaria</li>
-                			</ol>
-                	</p>
-                	<p>	
-                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/compare_filter} + '\''"><span class="fa fa-tasks">&nbsp;Comparador de periodes</span></button> eina comparar dos periodes per franja horaria. Aquesta pantalla està pensada per analitzar l'impacte que tenen els canvis que es facin en els recursos de l'atenció telefònica sobre la qualitat del servei 
-                	</p>
-                	<p>
-                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/calls_filter} + '\''"><span class="fa fa-phone">&nbsp;Buscador de trucades</span></button> permet buscar trucades concretes segons una extensió, un destí o una selecció de dies. Possibles exemples de per què usariem aquesta pantalla serien:
-                		    <ol>
-                				<li>comprovar si una extensió ha trucat realment a un pacient</li>
-                				<li>veure quantes vegades ha trucat al centre un pacient</li>
-                				<li>veure quantes trucades ha rebut un departament en un periode concret</li>
-                			</ol>  
-                	</p>
-                	<p>
-                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/graphics_filter} + '\''"><span class="fa fa-bar-chart-o">&nbsp;Gràfiques</span></button> és una extensió de l'anàlisi de periode. Permet seleccionar un periode i obtenim dues gràfiques complementàries:
-                		    <ol>
-                				<li>Gràfica trucades rebudes vs ateses en valor absolut: per visualitzar la diferència entre les trucades que rebem i les que atenem</li>
-                				<li>Gràfica diferència rebudes vs ateses en valor absolut: per visualitzar ailladament les trucades que deixem d'atendre</li>
-                			</ol>
-                			Aquesta pantalla ens permet veure més visualment quines franjes horaries necessiten més reforç de recursos d'atenció telefònica.
-                	</p>
-                	<p>
-                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/llegenda} + '\''"><span class="fa fa-book">&nbsp;Llegenda</span></button> llista de grups i extensions donats d'alta a la centraleta. És útil per consultar quin número té una persona o departament de l'empresa.
-                	</p>
-                </div>
+			<div class="col-lg-12">
+			
+				<div class="panel panel-info">
+                        <div class="panel-heading">
+                        	<h4>Locució actual</h4>
+                        </div>
+                        <div class="panel-body">
+                        	<p>
+                        		Benvinguts a Creu Groga,
+                        			<ul>
+                        				<li>Per consultes generals o per demanar hora, premi 1 (desvía cap al 6000),</li>
+                        				<li>Per parlar amb un departament específic, premi 2 (desvía cap a una altra locució)
+                        					<ul>
+		                        				<li>Per parlar amb odontologia, premi 1 (6002)</li>
+		                        				<li>Per parlar amb rehabilitació, premi 2 (6001)</li>
+		                        				<li>Per parlar amb el servei de Salut Mental, premi 3 (6005)</li>
+		                        				<li>Per parlar amb la Fundació Creu Groga, premi 4 (6007)</li>
+		                        				<li>Per parlar amb Administració, premi 5 (6003)</li>
+                        					</ul>
+                        				</li>
+	                        			<li>Per cancelar la seva visita o consultes curtes, por fer-ho per whatsapp al número 629989784 o be accedint a la nostra web</li>	
+                        				<li>If you want to be attended in english, push 3 (desvía cap al 629989784)</li>
+                        			</ul>
+                        	</p>
+                        </div>
+                        <div class="panel-footer">
+							<p class="small">Aquesta locució està activa des del 03/04/2019</p>
+                        </div>
+                    </div>
+			
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12">
+			
+				<div class="panel panel-info">
+                        <div class="panel-heading">
+                        	<h4>Telefons externs</h4>
+                        </div>
+                        <div class="panel-body">
+                        	<table class="table table-responsive">
+                        		<tr>
+                        			<td>Administració</td>
+                        			<td>937661866</td>
+                        			<td>desvia cap al 6003</td>
+                        		</tr>
+                        		<tr>
+                        			<td>Creu Groga</td>
+                        			<td>937662030</td>
+                        			<td>desvia cap a la locució</td>
+                        		</tr>
+                        		<tr>
+                        			<td>Rehabilitació</td>
+                        			<td>937664001</td>
+                        			<td>desvia cap al 6001</td>
+                        		</tr>
+                        		<tr>
+                        			<td>Gimnas</td>
+                        			<td>937661650</td>
+                        			<td>desvia cap a l'extensió 560</td>
+                        		</tr>
+                        		<tr>
+                        			<td>SPA</td>
+                        			<td>937690001</td>
+                        			<td>desvia cap al 6004</td>
+                        		</tr>
+                        	</table>
+                        </div>
+                    </div>
+			
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12">
+			
+				<div class="panel panel-info">
+                        <div class="panel-heading">
+                        	<h4>Explicació de les opcions de menú</h4>
+                        </div>
+                        <div class="panel-body">
+                        <p>	
+	                		<strong>¿Què pot fer amb aquesta aplicació?</strong> En el menú superior trobarà les següents opcions:
+	                	</p>
+	                	<p>
+	                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/} + '\''"><span class="fa fa-home">&nbsp;Inici</span></button> Pantalla actual
+	                	</p>
+	                	<p>
+	                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/dashboard} + '\''"><span class="fa fa-dashboard">&nbsp;Panell diari</span></button> dades d'atenció telefònica del dia d'avui. Aquesta pantalla inclou:
+	                			<ol>
+	                				<li>panell de trucades rebudes i ateses per departament</li>
+	                				<li>mateix panell però amb dades de fa 7 dies a la mateixa hora</li>
+	                				<li>registre de telefons que han trucat a recepció i no els hem atès</li>
+	                				<li>quantes trucades ha atès cada extensió del grup de atenció telefònica</li>
+	                			</ol>
+	                	</p>
+	                	<p>
+	                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/report_filter} + '\''"><span class="fa fa-calendar">&nbsp;Anàlisi de periode</span></button> eina per analitzar l'atenció telefònica en un periode concret. Permet:
+	                			<ol>
+	                				<li>veure les trucades a cada departament</li>
+	                				<li>veure les trucades ateses i realitzades de cada extensió del grup d'atenció telefònica</li>
+	                				<li>veure gràficament la distribució de càrrega de trucades per extensió</li>
+	                				<li>valorar la qualitat d'atenció per franja horaria</li>
+	                			</ol>
+	                	</p>
+	                	<p>	
+	                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/compare_filter} + '\''"><span class="fa fa-tasks">&nbsp;Comparador de periodes</span></button> eina comparar dos periodes per franja horaria. Aquesta pantalla està pensada per analitzar l'impacte que tenen els canvis que es facin en els recursos de l'atenció telefònica sobre la qualitat del servei 
+	                	</p>
+	                	<p>
+	                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/calls_filter} + '\''"><span class="fa fa-phone">&nbsp;Buscador de trucades</span></button> permet buscar trucades concretes segons una extensió, un destí o una selecció de dies. Possibles exemples de per què usariem aquesta pantalla serien:
+	                		    <ol>
+	                				<li>comprovar si una extensió ha trucat realment a un pacient</li>
+	                				<li>veure quantes vegades ha trucat al centre un pacient</li>
+	                				<li>veure quantes trucades ha rebut un departament en un periode concret</li>
+	                				<li>etc</li>
+	                			</ol>  
+	                	</p>
+	                	<p>
+	                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/graphics_filter} + '\''"><span class="fa fa-bar-chart-o">&nbsp;Gràfiques</span></button> Permet seleccionar un periode i obtenir dues gràfiques complementàries:
+	                		    <ol>
+	                				<li>Gràfica trucades rebudes vs ateses en valor absolut: per visualitzar la diferència entre les trucades que rebem i les que atenem</li>
+	                				<li>Gràfica diferència rebudes vs ateses en valor absolut: per visualitzar ailladament les trucades que deixem d'atendre</li>
+	                			</ol>
+	                	</p>
+	                	<p>
+	                		<button class="btn btn-outline btn-primary" type="button" th:onclick="'window.location.href = \'' + @{/llegenda} + '\''"><span class="fa fa-book">&nbsp;Llegenda</span></button> llista de grups i extensions donats d'alta a la centraleta. És útil per consultar quin número té una persona o departament de l'empresa.
+	                	</p>
+	                	<p>	
+	                		<strong>¿Què s'ha quedat per fer per falta de temps?</strong>
+	                		<ol>
+	                			<li>Definir horaris/torns i comparar resultats entre ells (per exemple definir l'horari del 111 i comparar resultats amb fora d'aquest horari)</li>
+	                			<li>Configurar un nivell de qualitat mínim d'atenció i afegir elements visuals en funció de si es sobrepassa aquest nivell (per exemple, definir que totes les franges que sobrepassin el 15% de percentatge de no ateses es marquin visualment)</li>
+	                			<li>En el panell diari dintre de la llista de trucades no ateses, permetre veure el detall de les trucades que ha realitzat aquest número de telèfon i treure'l de la llista manualment si el truquem</li>
+	                		</ol>
+	                	</p>
+                        </div>
+                    </div>
+			
+			</div>
 		</div>
 		<div th:insert="plantilla :: footer"></div>
 	</div>
