@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="icon" type="image/png" th:href="@{/img/8_ico.png}" />
 	<!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
 </head>
 <body>
@@ -15,47 +16,50 @@
 		<div th:if="${message != null && message != ''}" th:text="${message}" class="alert alert-danger" role="alert"/>
         <form th:action="@{/compare}" method="post" class="form-horizontal">
         <div class="form-group">
-				<label class="col-md-2 control-label">Periode 1, data inici:</label>
-				<div class="col-md-2 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-calendar"></i></span><input type="date"
-							name="periode1_datainici" id="periode1_datainici"
-							class="form-control" />
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-2 control-label">Periode 1, data fi:</label>
-				<div class="col-md-2">
-					<div class="input-group">
-						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-calendar"></i></span><input type="date"
-							name="periode1_datafi" id="periode1_datafi" class="form-control" />
-					</div>
-				</div>
-			</div>
-        	<div class="form-group">
-				<label class="col-md-2 control-label">Periode 2, data inici:</label>
-				<div class="col-md-2 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-calendar"></i></span><input type="date"
-							name="periode2_datainici" id="periode2_datainici"
-							class="form-control" />
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-2 control-label">Periode 2, data fi:</label>
-				<div class="col-md-2">
-					<div class="input-group">
-						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-calendar"></i></span><input type="date"
-							name="periode2_datafi" id="periode2_datafi" class="form-control" />
-					</div>
-				</div>
-			</div>
+							<label class="col-md-2 control-label">Periode 1, data inici:</label>
+							<div class="col-md-2">
+								<div class="input-group datepick">
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</div>
+									<input type="text" class="form-control" name="periode1_datainici" id="periode1_datainici" placeholder="trii en el calendari" readonly>
+								</div>
+							</div>
+						</div>
+		<div class="form-group">
+							<label class="col-md-2 control-label">Periode 1, data fi:</label>
+							<div class="col-md-2">
+								<div class="input-group datepick">
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</div>
+									<input type="text" class="form-control" name="periode1_datafi" id="periode1_datafi" placeholder="trii en el calendari" readonly>
+								</div>
+							</div>
+						</div>	
+<div class="form-group">
+							<label class="col-md-2 control-label">Periode 2, data inici:</label>
+							<div class="col-md-2">
+								<div class="input-group datepick">
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</div>
+									<input type="text" class="form-control" name="periode2_datainici" id="periode2_datainici" placeholder="trii en el calendari" readonly>
+								</div>
+							</div>
+						</div>												
+
+<div class="form-group">
+							<label class="col-md-2 control-label">Periode 2, data fi:</label>
+							<div class="col-md-2">
+								<div class="input-group datepick">
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</div>
+									<input type="text" class="form-control" name="periode2_datafi" id="periode2_datafi" placeholder="trii en el calendari" readonly>
+								</div>
+							</div>
+						</div>												
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-md-1">
 					<input type=submit class="form-control" value="Buscar" />

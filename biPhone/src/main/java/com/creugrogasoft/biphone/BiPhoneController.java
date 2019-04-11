@@ -126,10 +126,10 @@ public class BiPhoneController {
 		YearMonth thisMonth    = YearMonth.now();
 		YearMonth lastMonth    = thisMonth.minusMonths(1);
 
-		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
-		DateTimeFormatter dayMonthYearFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
+		DateTimeFormatter dayMonthYearFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		String periode_datainici = lastMonth.format(monthYearFormatter)+"-01";
+		String periode_datainici = "01/" + lastMonth.format(monthYearFormatter);
 		String periode_datafi = lastMonth.atEndOfMonth().format(dayMonthYearFormatter);
 
 		model.addAttribute("lastmonth_periode_datainici", periode_datainici);
@@ -148,15 +148,15 @@ public class BiPhoneController {
 		LocalDate startOfPastWeek = startOfCurrentWeek.minusDays(7);
 		LocalDate endOfPastWeek = startOfPastWeek.plusDays(6);
 		
-		model.addAttribute("lastweek_periode_datainici", startOfPastWeek);
-		model.addAttribute("lastweek_periode_datafi", endOfPastWeek);
+		model.addAttribute("lastweek_periode_datainici", startOfPastWeek.format(dayMonthYearFormatter));
+		model.addAttribute("lastweek_periode_datafi", endOfPastWeek.format(dayMonthYearFormatter));
 		
 		/*
 		 * Today and Yesterday
 		 */
 		
-		model.addAttribute("avui", now);
-		model.addAttribute("ahir", now.plusDays(-1));
+		model.addAttribute("avui", now.format(dayMonthYearFormatter));
+		model.addAttribute("ahir", now.plusDays(-1).format(dayMonthYearFormatter));
 				
 		return "graphics_filter";
 	}
@@ -173,8 +173,8 @@ public class BiPhoneController {
 				periode_datafi.compareTo("") != 0 ) {
 			String rawdata = BIPhoneService.getDadesGraphics(periode_datainici, periode_datafi);
 			
-			model.addAttribute("periode_datainici", Utils.invertStringDate(periode_datainici));
-			model.addAttribute("periode_datafi", Utils.invertStringDate(periode_datafi));
+			model.addAttribute("periode_datainici", periode_datainici);
+			model.addAttribute("periode_datafi", periode_datafi);
 			
 			String data = rawdata.split("&&")[0];
 			String data_dif = rawdata.split("&&")[1];
@@ -209,10 +209,10 @@ public class BiPhoneController {
 			String table_periode1 = tables.split("&&")[0];
 			String table_periode2 = tables.split("&&")[1];
 			
-			model.addAttribute("periode1_datainici", Utils.invertStringDate(periode1_datainici));
-			model.addAttribute("periode1_datafi", Utils.invertStringDate(periode1_datafi));
-			model.addAttribute("periode2_datainici", Utils.invertStringDate(periode2_datainici));
-			model.addAttribute("periode2_datafi", Utils.invertStringDate(periode2_datafi));
+			model.addAttribute("periode1_datainici", periode1_datainici);
+			model.addAttribute("periode1_datafi", periode1_datafi);
+			model.addAttribute("periode2_datainici", periode2_datainici);
+			model.addAttribute("periode2_datafi", periode2_datafi);
 			
 			model.addAttribute("table_periode1", table_periode1);
 			model.addAttribute("table_periode2", table_periode2);
@@ -237,13 +237,13 @@ public class BiPhoneController {
 		YearMonth lastMonth    = thisMonth.minusMonths(1);
 		YearMonth twoMonthsAgo = thisMonth.minusMonths(2);
 
-		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
-		DateTimeFormatter dayMonthYearFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
+		DateTimeFormatter dayMonthYearFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		String periode2_datainici = lastMonth.format(monthYearFormatter)+"-01";
+		String periode2_datainici = "01/" + lastMonth.format(monthYearFormatter);
 		String periode2_datafi = lastMonth.atEndOfMonth().format(dayMonthYearFormatter);
 		
-		String periode1_datainici = twoMonthsAgo.format(monthYearFormatter)+"-01";
+		String periode1_datainici = "01/" + twoMonthsAgo.format(monthYearFormatter);
 		String periode1_datafi = twoMonthsAgo.atEndOfMonth().format(dayMonthYearFormatter);
 		
 		model.addAttribute("twomonths_periode1_datainici", periode1_datainici);
@@ -267,10 +267,10 @@ public class BiPhoneController {
 		LocalDate startOfTwoWeeksAgo = startOfCurrentWeek.minusDays(14);
 		LocalDate endOfTwoWeeksAgo = startOfTwoWeeksAgo.plusDays(6);
 				
-		model.addAttribute("twoweeks_periode1_datainici", startOfTwoWeeksAgo);
-		model.addAttribute("twoweeks_periode1_datafi", endOfTwoWeeksAgo);
-		model.addAttribute("twoweeks_periode2_datainici", startOfPastWeek);
-		model.addAttribute("twoweeks_periode2_datafi", endOfPastWeek);
+		model.addAttribute("twoweeks_periode1_datainici", startOfTwoWeeksAgo.format(dayMonthYearFormatter));
+		model.addAttribute("twoweeks_periode1_datafi", endOfTwoWeeksAgo.format(dayMonthYearFormatter));
+		model.addAttribute("twoweeks_periode2_datainici", startOfPastWeek.format(dayMonthYearFormatter));
+		model.addAttribute("twoweeks_periode2_datafi", endOfPastWeek.format(dayMonthYearFormatter));
 		
 		return "compare_filter";
 	}
@@ -287,10 +287,10 @@ public class BiPhoneController {
 		YearMonth thisMonth    = YearMonth.now();
 		YearMonth lastMonth    = thisMonth.minusMonths(1);
 
-		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
-		DateTimeFormatter dayMonthYearFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
+		DateTimeFormatter dayMonthYearFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		String periode_datainici = lastMonth.format(monthYearFormatter)+"-01";
+		String periode_datainici = "01/" + lastMonth.format(monthYearFormatter);
 		String periode_datafi = lastMonth.atEndOfMonth().format(dayMonthYearFormatter);
 
 		model.addAttribute("lastmonth_periode_datainici", periode_datainici);
@@ -309,15 +309,15 @@ public class BiPhoneController {
 		LocalDate startOfPastWeek = startOfCurrentWeek.minusDays(7);
 		LocalDate endOfPastWeek = startOfPastWeek.plusDays(6);
 		
-		model.addAttribute("lastweek_periode_datainici", startOfPastWeek);
-		model.addAttribute("lastweek_periode_datafi", endOfPastWeek);
+		model.addAttribute("lastweek_periode_datainici", startOfPastWeek.format(dayMonthYearFormatter));
+		model.addAttribute("lastweek_periode_datafi", endOfPastWeek.format(dayMonthYearFormatter));
 		
 		/*
 		 * Today and Yesterday
 		 */
 		
-		model.addAttribute("avui", now);
-		model.addAttribute("ahir", now.plusDays(-1));
+		model.addAttribute("avui", now.format(dayMonthYearFormatter));
+		model.addAttribute("ahir", now.plusDays(-1).format(dayMonthYearFormatter));
 		
 				
 		return "report_filter";
@@ -377,8 +377,8 @@ public class BiPhoneController {
 			String table_perfranjahoraria = BIPhoneService.getPeriode(periode_datainici, periode_datafi);
 			String data_atesesperextensio = BIPhoneService.getDadesGraphicsReport(periode_datainici, periode_datafi);
 			
-			model.addAttribute("periode_datainici", Utils.invertStringDate(periode_datainici));
-			model.addAttribute("periode_datafi", Utils.invertStringDate(periode_datafi));
+			model.addAttribute("periode_datainici", periode_datainici);
+			model.addAttribute("periode_datafi", periode_datafi);
 			model.addAttribute("data_atesesperextensio", data_atesesperextensio);
 			
 			model.addAttribute("table_pergrup", table_pergrup);

@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.sql.Connection;
 
 import java.util.HashMap;
+
+import javax.annotation.PostConstruct;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Connection;
@@ -18,6 +21,11 @@ public class BIPhoneService {
 	
 	public static HashMap<String, String> llegenda = new HashMap();
 
+	@PostConstruct
+    public void init() {
+		BIPhoneService.getLlegendaGrups();
+    }
+	
 	public static String getAvui () {
 		/*
 			Panell resum diari
@@ -288,7 +296,7 @@ public class BIPhoneService {
 	            Statement stmt = conn.createStatement();
 	            String sql = "select LPAD(HOUR(calldate),2,'0') as hora, count(*) as total, sum(IF(disposition = 'ANSWERED' && lastapp='Dial', 1, 0)) as ateses "
 	                    + "from asteriskcdrdb.cdr "
-	                    + "where HOUR(calldate) BETWEEN 7 AND 22 and dst=6000 and dcontext = 'ext-group' and DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode_datafi+ "', '%Y-%m-%d') "
+	                    + "where HOUR(calldate) BETWEEN 7 AND 22 and dst=6000 and dcontext = 'ext-group' and DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode_datafi+ "', '%d/%m/%Y') "
 	                    + "group by LPAD(HOUR(calldate),2,'0') "
 	                    + "order by 1 asc";
 	            ResultSet rs=stmt.executeQuery(sql);
@@ -341,7 +349,7 @@ public class BIPhoneService {
 	            String sql = "select RIGHT(LEFT(dstchannel, 7), 3) as extensio, sum(IF(disposition = 'ANSWERED' && lastapp='Dial', 1, 0)) as ateses " + 
 	            		"from asteriskcdrdb.cdr " + 
 	            		"where dst=6000 and dcontext = 'ext-group' and " + 
-	            		"	DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode_datafi + "', '%Y-%m-%d') " + 
+	            		"	DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode_datafi + "', '%d/%m/%Y') " + 
 	            		"    and RIGHT(LEFT(dstchannel, 7), 3) IN (111,112,102,100,101,104) " + 
 	            		"group by RIGHT(LEFT(dstchannel, 7), 3)";
 	            ResultSet rs=stmt.executeQuery(sql);
@@ -356,7 +364,7 @@ public class BIPhoneService {
 	            sql = "select src, SUM(IF(left(dst,1) = 0, 1, 0)) as externes,  SUM(IF(left(dst,1) = 0, 0, 1)) as internes, count(*) as total " + 
 	            		"from asteriskcdrdb.cdr " + 
 	            		"where src in (111,112,102,100,101,104) and " + 
-	            		"	DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode_datafi + "', '%Y-%m-%d') " + 
+	            		"	DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode_datafi + "', '%d/%m/%Y') " + 
 	            		"group by src order by src asc";
 	            rs=stmt.executeQuery(sql);
 
@@ -403,7 +411,7 @@ public class BIPhoneService {
 	            Statement stmt = conn.createStatement();
 	            String sql = "select LPAD(HOUR(calldate),2,'0') as hora, count(*) as total, sum(IF(disposition = 'ANSWERED' && lastapp='Dial', 1, 0)) as ateses "
 	                    + "from asteriskcdrdb.cdr "
-	                    + "where HOUR(calldate) BETWEEN 7 AND 22 and dst=6000 and dcontext = 'ext-group' and DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode_datafi+ "', '%Y-%m-%d') "
+	                    + "where HOUR(calldate) BETWEEN 7 AND 22 and dst=6000 and dcontext = 'ext-group' and DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode_datafi+ "', '%d/%m/%Y') "
 	                    + "group by LPAD(HOUR(calldate),2,'0') "
 	                    + "order by 1 asc";
 	            ResultSet rs=stmt.executeQuery(sql);
@@ -472,7 +480,7 @@ public class BIPhoneService {
 	            Statement stmt = conn.createStatement();
 	            String sql = "select LPAD(HOUR(calldate),2,'0') as hora, count(*) as total, sum(IF(disposition = 'ANSWERED' && lastapp='Dial', 1, 0)) as ateses "
 	                    + "from asteriskcdrdb.cdr "
-	                    + "where HOUR(calldate) BETWEEN 7 AND 22 and dst=6000 and dcontext = 'ext-group' and DATE(calldate) BETWEEN STR_TO_DATE('" + periode1_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode1_datafi+ "', '%Y-%m-%d') "
+	                    + "where HOUR(calldate) BETWEEN 7 AND 22 and dst=6000 and dcontext = 'ext-group' and DATE(calldate) BETWEEN STR_TO_DATE('" + periode1_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode1_datafi+ "', '%d/%m/%Y') "
 	                    + "group by LPAD(HOUR(calldate),2,'0') "
 	                    + "order by 1 asc";
 	            ResultSet rs=stmt.executeQuery(sql);
@@ -502,7 +510,7 @@ public class BIPhoneService {
 
 	            sql = "select LPAD(HOUR(calldate),2,'0') as hora, count(*) as total, sum(IF(disposition = 'ANSWERED' && lastapp='Dial', 1, 0)) as ateses "
 	                    + "from asteriskcdrdb.cdr "
-	                    + "where HOUR(calldate) BETWEEN 7 AND 22 and dst=6000 and dcontext = 'ext-group' and DATE(calldate) BETWEEN STR_TO_DATE('" + periode2_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode2_datafi+ "', '%Y-%m-%d') "
+	                    + "where HOUR(calldate) BETWEEN 7 AND 22 and dst=6000 and dcontext = 'ext-group' and DATE(calldate) BETWEEN STR_TO_DATE('" + periode2_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode2_datafi+ "', '%d/%m/%Y') "
 	                    + "group by LPAD(HOUR(calldate),2,'0') "
 	                    + "order by 1 asc";
 	            rs=stmt.executeQuery(sql);
@@ -580,7 +588,7 @@ public class BIPhoneService {
 	            String sql = "select dst, count(*) as total, sum(IF(disposition = 'ANSWERED' && lastapp='Dial', 1, 0)) as ateses " + 
 	            		"from asteriskcdrdb.cdr " + 
 	            		"where dcontext IN ('ext-group', 'ext-queues') " + 
-	            		"    and DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode_datafi + "', '%Y-%m-%d') " + 
+	            		"    and DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode_datafi + "', '%d/%m/%Y') " + 
 	            		"group by dst";
 	            ResultSet rs=stmt.executeQuery(sql);
 
@@ -637,7 +645,7 @@ public class BIPhoneService {
 	            String sql = "select RIGHT(LEFT(dstchannel, 7), 3) as extensio, sum(IF(disposition = 'ANSWERED' && lastapp='Dial', 1, 0)) as ateses " + 
 	            		"from asteriskcdrdb.cdr " + 
 	            		"where dst=6000 and dcontext = 'ext-group' and " + 
-	            		"	DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode_datafi + "', '%Y-%m-%d') " + 
+	            		"	DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode_datafi + "', '%d/%m/%Y') " + 
 	            		"    and RIGHT(LEFT(dstchannel, 7), 3) IN (111,112,102,100,101,104) " + 
 	            		"group by RIGHT(LEFT(dstchannel, 7), 3)";
 	            ResultSet rs=stmt.executeQuery(sql);
@@ -652,7 +660,7 @@ public class BIPhoneService {
 	            sql = "select src, SUM(IF(left(dst,1) = 0, 1, 0)) as externes,  SUM(IF(left(dst,1) = 0, 0, 1)) as internes, count(*) as total " + 
 	            		"from asteriskcdrdb.cdr " + 
 	            		"where src in (111,112,102,100,101,104) and " + 
-	            		"	DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%Y-%m-%d') AND STR_TO_DATE('" + periode_datafi + "', '%Y-%m-%d') " + 
+	            		"	DATE(calldate) BETWEEN STR_TO_DATE('" + periode_datainici + "', '%d/%m/%Y') AND STR_TO_DATE('" + periode_datafi + "', '%d/%m/%Y') " + 
 	            		"group by src order by src asc";
 	            rs=stmt.executeQuery(sql);
 
@@ -718,14 +726,14 @@ public class BIPhoneService {
 	            	if (useAND) {
 	            		sql += " and ";
 	            	}
-           			sql += "DATE(calldate) >= STR_TO_DATE('" + periode_datainici + "', '%Y-%m-%d')";
+           			sql += "DATE(calldate) >= STR_TO_DATE('" + periode_datainici + "', '%d/%m/%Y')";
            			useAND = true;
            		}
 	            if (periode_datafi.compareTo("") != 0) {
 	            	if (useAND) {
 	            		sql += " and ";
 	            	}
-           			sql += "DATE(calldate) <= STR_TO_DATE('" + periode_datafi + "', '%Y-%m-%d')";
+           			sql += "DATE(calldate) <= STR_TO_DATE('" + periode_datafi + "', '%d/%m/%Y')";
            			useAND = true;
            		}
 	            

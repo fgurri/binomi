@@ -12,12 +12,20 @@
 	<link th:href="@{/css/biphone.css}" rel="stylesheet">
      
      
-     		<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
-		<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-		<script th:src="@{/js/custom.jquery.dataTables.min.js}"></script>
- <script th:src="@{/js/raphael-min.js}"></script>
- <script th:src="@{/js/morris.min.js}"></script>
-</head>
+     	<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+     	<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+     	
+     	
+     <script language="javascript" src="https://momentjs.com/downloads/moment.js"></script>
+	<script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+     
+     	
+     	<script th:src="@{/js/custom.jquery.dataTables.min.js}"></script>
+		 <script th:src="@{/js/raphael-min.js}"></script>
+		 <script th:src="@{/js/morris.min.js}"></script>
+		 
+ </head>
 
   <body>
   	<div th:fragment="menu">
@@ -54,6 +62,14 @@
   	</div>
   	
   	<div th:fragment="includes">
+  	<script>
+		$(document).ready(function() {
+		  $('.datepick').datetimepicker({
+			  format: 'DD/MM/YYYY',
+		    	ignoreReadonly: true
+		  });
+		});
+  </script>
   	</div>
   </body>
   

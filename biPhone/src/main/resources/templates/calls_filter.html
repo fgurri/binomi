@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="icon" type="image/png" th:href="@{/img/8_ico.png}" />
 <!--/*/ <th:block th:include="plantilla :: headers"> </th:block> /*/-->
 </head>
 <body>
@@ -41,23 +42,24 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-md-2 control-label">Data des de</label>
-				<div class="col-md-2 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-calendar"></i></span><input type="date"
-							name="periode_datainici" id="periode_datainici"
-							class="form-control" />
+				<label class="col-md-2 control-label">Data inici:</label>
+				<div class="col-md-2">
+					<div class="input-group datepick">
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</div>
+						<input type="text" class="form-control" name="periode_datainici" id="periode_datainici" placeholder="trii en el calendari" readonly>
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-md-2 control-label">Data fins</label>
+				<label class="col-md-2 control-label">Data fi:</label>
 				<div class="col-md-2">
-					<div class="input-group">
-						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-calendar"></i></span><input type="date"
-							name="periode_datafi" id="periode_datafi" class="form-control" />
+					<div class="input-group datepick">
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</div>
+						<input type="text" class="form-control" name="periode_datafi" id="periode_datafi" placeholder="trii en el calendari" readonly>
 					</div>
 				</div>
 			</div>

@@ -9,6 +9,5 @@ public class BiPhoneApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BiPhoneApplication.class, args);
-		BIPhoneService.getLlegendaGrups();
 	}
 }
